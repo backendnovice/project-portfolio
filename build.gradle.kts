@@ -25,6 +25,11 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // Spring Boot Starter Data JPA
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.5")
+    // Ojdbc8
+    implementation("com.oracle.database.jdbc:ojdbc8:21.9.0.0")
 }
 
 tasks.withType<Test> {
