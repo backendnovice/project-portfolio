@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/common :: head-common}">
+    <title>로그인</title>
+</head>
+<body>
+    <div class="container">
+        <h2>로그인</h2>
+        <form th:method="post" th:action="@{~/account/login}">
+            <div class="mb-3">
+                <label for="id" class="form-label">아이디</label>
+                <input type="text" class="form-control" id="id" name="id" placeholder="아이디" autocomplete="off">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">패스워드</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="패스워드" autocomplete="off">
+            </div>
+            <div class="mb-2">
+                <button type="button" class="btn btn-primary" id="btn-login">로그인</button>
+            </div>
+            <div class="mb-2">
+                <button type="button" class="btn btn-link" th:onclick="|location.href='@{~/account/register}'|">아이디가 없습니까?</button>
+                <button type="button" class="btn btn-link" th:onclick="|location.href='@{~/account/support/password}'|">비밀번호를 잊어버렸습니까?</button>
+            </div>
+
+            <script></script>
+        </form>
+    </div>
+</body>
+</html>
