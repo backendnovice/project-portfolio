@@ -1,5 +1,7 @@
 package backendnovice.projectportfolio.domain.account.domain;
 
+import backendnovice.projectportfolio.global.domain.Role;
+import backendnovice.projectportfolio.global.domain.TimeEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountEntity {
+public class AccountEntity extends TimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NO")
@@ -30,7 +32,7 @@ public class AccountEntity {
     @Column(name = "PHONE")
     private String phone;
     
-    @ManyToOne
-    @JoinColumn(name = "ROLE")
-    private RoleEntity role;
+    @Column(name = "ROLE")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
