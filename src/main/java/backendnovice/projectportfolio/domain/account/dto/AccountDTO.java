@@ -17,4 +17,6 @@ public class AccountDTO {
     private String email;
     
     private String phone;
+    
+    private boolean isAdmin = false;
 }
