@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountDTO {
-    private String id;
+    private String accountId;
     
-    private String password;
+    private String accountPassword;
     
-    private String email;
+    private String accountEmail;
     
-    private String phone;
+    private String accountPhone;
     
-    private boolean isAdmin = false;
+    public boolean isAdmin;
 }

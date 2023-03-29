@@ -17,22 +17,22 @@ import lombok.NoArgsConstructor;
 public class AccountEntity extends TimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "NO")
+    @Column(name = "no")
     private Long no;
     
-    @Column(name = "ID")
-    private String id;
+    @Column(name = "id")
+    private String accountId;
     
-    @Column(name = "PASSWORD")
-    private String password;
+    @Column(name = "password")
+    private String accountPassword;
     
-    @Column(name = "EMAIL")
-    private String email;
+    @Column(name = "email")
+    private String accountEmail;
     
-    @Column(name = "PHONE")
-    private String phone;
+    @Column(name = "phone")
+    private String accountPhone;
     
-    @Column(name = "ROLE")
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role accountRole;
 }

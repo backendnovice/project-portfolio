@@ -17,7 +17,8 @@ public class AccountServiceImpl implements AccountService {
     
     @Override
     public boolean registerAccount(AccountDTO accountDTO) {
-        if (!accountRepository.existsById(accountDTO.getId())) {
+        System.out.println(accountDTO.toString());
+        if (!accountRepository.existsByAccountId(accountDTO.getAccountId())) {
             AccountEntity account = dtoToEntity(accountDTO);
             accountRepository.save(account);
             return true;

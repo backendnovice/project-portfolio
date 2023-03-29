@@ -18,11 +18,11 @@ public interface AccountService {
         }
         
         AccountEntity account = AccountEntity.builder()
-                .id(accountDTO.getId())
-                .password(accountDTO.getPassword())
-                .email(accountDTO.getEmail())
-                .phone(accountDTO.getPhone())
-                .role(role)
+                .accountId(accountDTO.getAccountId())
+                .accountPassword(accountDTO.getAccountPassword())
+                .accountEmail(accountDTO.getAccountEmail())
+                .accountPhone(accountDTO.getAccountPhone())
+                .accountRole(role)
                 .build();
         
         return account;
