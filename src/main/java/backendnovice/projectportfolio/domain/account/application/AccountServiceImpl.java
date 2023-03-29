@@ -17,13 +17,17 @@ public class AccountServiceImpl implements AccountService {
     
     @Override
     public boolean registerAccount(AccountDTO accountDTO) {
-        System.out.println(accountDTO.toString());
-        if (!accountRepository.existsByAccountId(accountDTO.getAccountId())) {
+        if (!accountRepository.existsByUsername(accountDTO.getUsername())) {
             AccountEntity account = dtoToEntity(accountDTO);
             accountRepository.save(account);
             return true;
         } else {
             return false;
         }
+    }
+    
+    @Override
+    public boolean loginAccount(AccountDTO accountDTO) {
+        return !accountRepository.existsByUsernameAndPassword(accountDTO.getUsername(), accountDTO.getPassword());
     }
 }

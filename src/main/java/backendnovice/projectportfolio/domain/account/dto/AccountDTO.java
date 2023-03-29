@@ -1,22 +1,26 @@
 package backendnovice.projectportfolio.domain.account.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class AccountDTO {
-    private String accountId;
+    private String username;
     
-    private String accountPassword;
+    private String password;
     
-    private String accountEmail;
+    private String email;
     
-    private String accountPhone;
+    private String phone;
     
     public boolean isAdmin;
+    
+    @Builder
+    public AccountDTO(String username, String password, String email, String phone, boolean isAdmin) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.isAdmin = false;
+    }
 }

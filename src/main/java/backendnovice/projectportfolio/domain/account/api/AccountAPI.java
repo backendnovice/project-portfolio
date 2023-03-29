@@ -21,50 +21,24 @@ public class AccountAPI {
         this.accountRepository = accountRepository;
     }
     
-    
-    @PostMapping("/login")
-    public ResponseEntity provideLoginValidate(AccountDTO accountDTO) {
-        boolean isCorrect = accountRepository.existsByAccountIdAndAccountPassword(accountDTO.getAccountEmail(), accountDTO.getAccountPassword());
-    
-        ResponseFormat response;
-        
-        if(isCorrect) {
-            response = ResponseFormat.builder()
-                    .httpCode(HttpStatus.OK.value())
-                    .httpStatus(HttpStatus.OK)
-                    .message("올바른 회원 입니다.")
-                    .build();
-        }else {
-            response = ResponseFormat.builder()
-                    .httpCode(HttpStatus.NOT_FOUND.value())
-                    .httpStatus(HttpStatus.NOT_FOUND)
-                    .message("회원을 찾을 수 없습니다.")
-                    .build();
-        }
-        
-        return new ResponseEntity(response, response.getHttpStatus());
-    }
-    
     @PostMapping("/register")
-    public ResponseEntity provideRegisterValidate(AccountDTO accountDTO) {
-        System.out.println(accountDTO.getAccountId());
-        boolean isExists = accountRepository.existsByAccountId(accountDTO.getAccountId());
+    public ResponseEntity provideRegisterValidate(@RequestBody AccountDTO accountDTO) {
+        boolean isExists = accountRepository.existsByUsername(accountDTO.getUsername());
         
+        String message;
         ResponseFormat response;
         
-        if(!isExists) {
-            response = ResponseFormat.builder()
-                    .httpCode(HttpStatus.OK.value())
-                    .httpStatus(HttpStatus.OK)
-                    .message("사용가능한 아이디 입니다.")
-                    .build();
-        }else {
-            response = ResponseFormat.builder()
-                    .httpCode(HttpStatus.NOT_FOUND.value())
-                    .httpStatus(HttpStatus.NOT_FOUND)
-                    .message("중복된 아이디 입니다.")
-                    .build();
-        }
+        if (!isExists)
+            message = "사용가능한 아이디입니다.";
+        else
+            message = "중복된 아이디입니다.";
+        
+        response = ResponseFormat.builder()
+                .httpCode(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message(message)
+                .success(!isExists)
+                .build();
         
         return new ResponseEntity(response, response.getHttpStatus());
     }

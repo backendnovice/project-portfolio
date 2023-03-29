@@ -7,6 +7,7 @@ import backendnovice.projectportfolio.global.domain.Role;
 public interface AccountService {
     boolean registerAccount(AccountDTO accountDTO);
     
+    boolean loginAccount(AccountDTO accountDTO);
     
     default AccountEntity dtoToEntity(AccountDTO accountDTO) {
         Role role;
@@ -18,11 +19,11 @@ public interface AccountService {
         }
         
         AccountEntity account = AccountEntity.builder()
-                .accountId(accountDTO.getAccountId())
-                .accountPassword(accountDTO.getAccountPassword())
-                .accountEmail(accountDTO.getAccountEmail())
-                .accountPhone(accountDTO.getAccountPhone())
-                .accountRole(role)
+                .username(accountDTO.getUsername())
+                .password(accountDTO.getPassword())
+                .email(accountDTO.getEmail())
+                .phone(accountDTO.getPhone())
+                .role(role)
                 .build();
         
         return account;

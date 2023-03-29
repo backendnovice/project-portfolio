@@ -18,21 +18,21 @@ public class AccountEntity extends TimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "no")
-    private Long no;
+    private Long id;
     
-    @Column(name = "id")
-    private String accountId;
+    @Column(name = "username")
+    private String username;
     
     @Column(name = "password")
-    private String accountPassword;
+    private String password;
     
     @Column(name = "email")
-    private String accountEmail;
+    private String email;
     
     @Column(name = "phone")
-    private String accountPhone;
+    private String phone;
     
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Role accountRole;
+    private Role role;
 }

@@ -4,9 +4,8 @@ import backendnovice.projectportfolio.domain.account.application.AccountService;
 import backendnovice.projectportfolio.domain.account.dto.AccountDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/account")
@@ -23,17 +22,26 @@ public class AccountController {
         return "/account/login";
     }
     
+    @PostMapping("/login")
+    public String login(@ModelAttribute AccountDTO accountDTO) {
+        if (accountService.loginAccount(accountDTO)) {
+            return "redirect:/blog/home";
+        } else {
+            return "redirect:/account/login";
+        }
+    }
+    
     @GetMapping("/register")
     public String getRegisterForm() {
         return "/account/register";
     }
     
     @PostMapping("/register")
-    public void register(AccountDTO accountDTO) {
+    public String register(@ModelAttribute AccountDTO accountDTO) {
         if (accountService.registerAccount(accountDTO)) {
-            getLoginForm();
+            return "redirect:/account/login";
         } else {
-            getRegisterForm();
+            return "redirect:/account/register";
         }
     }
 }

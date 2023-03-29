@@ -16,4 +16,5 @@ public class ResponseFormat {
     private Integer httpCode;
     private HttpStatus httpStatus;
     private String message;
+    private boolean success;
 }
