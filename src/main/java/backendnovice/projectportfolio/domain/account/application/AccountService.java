@@ -1,24 +1,19 @@
 package backendnovice.projectportfolio.domain.account.application;
 
-import backendnovice.projectportfolio.domain.account.domain.AccountEntity;
+import backendnovice.projectportfolio.domain.account.domain.Account;
 import backendnovice.projectportfolio.domain.account.dto.AccountDTO;
 import backendnovice.projectportfolio.global.domain.Role;
 
 public interface AccountService {
-    boolean registerAccount(AccountDTO accountDTO);
     
-    boolean loginAccount(AccountDTO accountDTO);
+    boolean loginProcess(AccountDTO accountDTO);
     
-    default AccountEntity dtoToEntity(AccountDTO accountDTO) {
-        Role role;
+    boolean registerProcess(AccountDTO accountDTO);
+    
+    default Account dtoToEntity(AccountDTO accountDTO) {
+        Role role = (accountDTO.isAdmin()) ? Role.ROLE_ADMIN : Role.ROLE_USER;
         
-        if (accountDTO.isAdmin()) {
-            role = Role.ROLE_ADMIN;
-        } else {
-            role = Role.ROLE_USER;
-        }
-        
-        AccountEntity account = AccountEntity.builder()
+        Account account = Account.builder()
                 .username(accountDTO.getUsername())
                 .password(accountDTO.getPassword())
                 .email(accountDTO.getEmail())
@@ -28,4 +23,5 @@ public interface AccountService {
         
         return account;
     }
+    
 }

@@ -1,7 +1,7 @@
-package backendnovice.projectportfolio.domain.post.domain;
+package backendnovice.projectportfolio.domain.board.domain;
 
-import backendnovice.projectportfolio.domain.account.domain.AccountEntity;
-import backendnovice.projectportfolio.global.domain.TimeEntity;
+import backendnovice.projectportfolio.domain.account.domain.Account;
+import backendnovice.projectportfolio.global.domain.BaseTime;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,28 +17,24 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostEntity extends TimeEntity {
+public class Post extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "p_id")
     private Long id;
     
-    @Column(name = "p_title")
     private String title;
     
-    @Column(name = "p_content")
     private String content;
-
-    @Column(name = "p_author")
+    
     private String author;
     
-    @Column(name = "p_views")
     private int views = 0;
     
-    @ManyToOne
-    @JoinColumn(name = "p_account")
-    private AccountEntity account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private Account account;
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     @OrderBy("id ASC")
-    private List<ReplyEntity> replies = new ArrayList<>();
+    private List<Reply> replies = new ArrayList<>();
+    
 }

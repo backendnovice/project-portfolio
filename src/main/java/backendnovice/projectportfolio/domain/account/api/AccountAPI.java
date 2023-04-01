@@ -1,19 +1,19 @@
 package backendnovice.projectportfolio.domain.account.api;
 
 import backendnovice.projectportfolio.domain.account.dao.AccountRepository;
-import backendnovice.projectportfolio.domain.account.domain.AccountEntity;
 import backendnovice.projectportfolio.domain.account.dto.AccountDTO;
-import backendnovice.projectportfolio.global.domain.ResponseFormat;
+import backendnovice.projectportfolio.global.response.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/account/api")
 public class AccountAPI {
+    
     private final AccountRepository accountRepository;
     
     @Autowired
@@ -21,23 +21,19 @@ public class AccountAPI {
         this.accountRepository = accountRepository;
     }
     
-    @PostMapping("/register")
-    public ResponseEntity provideRegisterValidate(@RequestBody AccountDTO accountDTO) {
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> provideIdExistence(@RequestBody AccountDTO accountDTO) {
         boolean isExists = accountRepository.existsByUsername(accountDTO.getUsername());
+    
+        CommonResponse response;
         
-        String message;
-        ResponseFormat response;
+        String message = (!isExists) ? "사용가능한 아이디입니다." : "중복된 아이디입니다.";
         
-        if (!isExists)
-            message = "사용가능한 아이디입니다.";
-        else
-            message = "중복된 아이디입니다.";
-        
-        response = ResponseFormat.builder()
+        response = CommonResponse.builder()
                 .httpCode(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
                 .message(message)
-                .success(!isExists)
+                .body(Map.of("isExist", isExists))
                 .build();
         
         return new ResponseEntity(response, response.getHttpStatus());

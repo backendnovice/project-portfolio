@@ -1,4 +1,4 @@
-package backendnovice.projectportfolio.global.domain;
+package backendnovice.projectportfolio.global.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,15 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseFormat {
+public class CommonResponse {
     private Integer httpCode;
     private HttpStatus httpStatus;
     private String message;
-    private boolean success;
+    
+    private Map<String, Object> body;
 }

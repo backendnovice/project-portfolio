@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/account")
 public class AccountController {
+    
     private final AccountService accountService;
     
     @Autowired
@@ -18,30 +19,35 @@ public class AccountController {
     }
     
     @GetMapping("/login")
-    public String getLoginForm() {
-        return "/account/login";
+    public String getLogin() {
+        return "/account/signIn";
     }
     
     @PostMapping("/login")
-    public String login(@ModelAttribute AccountDTO accountDTO) {
-        if (accountService.loginAccount(accountDTO)) {
+    public String postLogin(@ModelAttribute AccountDTO accountDTO, RedirectAttributes redirectAttributes) {
+        if (accountService.loginProcess(accountDTO)) {
+            redirectAttributes.addFlashAttribute("message", "로그인에 성공했습니다.");
             return "redirect:/blog/home";
         } else {
+            redirectAttributes.addFlashAttribute("message", "로그인에 실패했습니다.");
             return "redirect:/account/login";
         }
     }
     
     @GetMapping("/register")
-    public String getRegisterForm() {
+    public String getRegister() {
         return "/account/register";
     }
     
     @PostMapping("/register")
-    public String register(@ModelAttribute AccountDTO accountDTO) {
-        if (accountService.registerAccount(accountDTO)) {
+    public String postRegister(@ModelAttribute AccountDTO accountDTO, RedirectAttributes redirectAttributes) {
+        if (accountService.registerProcess(accountDTO)) {
+            redirectAttributes.addFlashAttribute("message", "회원가입에 성공했습니다.");
             return "redirect:/account/login";
         } else {
+            redirectAttributes.addFlashAttribute("message", "회원가입에 실패했습니다.");
             return "redirect:/account/register";
         }
     }
+    
 }

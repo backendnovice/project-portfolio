@@ -3,8 +3,11 @@ package backendnovice.projectportfolio.domain.account.dto;
 import lombok.*;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class AccountDTO {
+    
     private String username;
     
     private String password;
@@ -13,14 +16,7 @@ public class AccountDTO {
     
     private String phone;
     
-    public boolean isAdmin;
+    @Builder.Default
+    public boolean isAdmin = false;
     
-    @Builder
-    public AccountDTO(String username, String password, String email, String phone, boolean isAdmin) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
-        this.isAdmin = false;
-    }
 }

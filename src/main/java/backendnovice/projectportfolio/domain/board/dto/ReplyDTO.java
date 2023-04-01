@@ -1,19 +1,20 @@
-package backendnovice.projectportfolio.domain.post.dto;
+package backendnovice.projectportfolio.domain.board.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class ReplyDTO {
+    
+    private Long id;
+    
     private String comment;
     
     private String author;
     
-    @Builder
-    public ReplyDTO(String comment, String author) {
-        this.comment = comment;
-        this.author = author;
-    }
 }
